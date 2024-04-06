@@ -44,6 +44,9 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
             onTap: () {
               DeviceApps.openApp(application.packageName);
             },
+            onLongPress: (){
+              DeviceApps.openAppSettings(application.packageName);
+            },
             title: Text(
               application.appName,
               style: const TextStyle(fontSize: 24),
