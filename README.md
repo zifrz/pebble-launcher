@@ -4,6 +4,6 @@ An Android App Launcher made using Flutter.
 
 ## To Do
 
-- [X] Favourite Apps on Home Screen
-- [ ] Apps Sorted Alphabetically in App Drawer
+- [X] Apps Sorted Alphabetically in App Drawer
+- [ ] Favourite Apps on Home Screen
 - [ ] App Search
