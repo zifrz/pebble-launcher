@@ -34,25 +34,30 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black87,
-      body: ListView.builder(
-        itemCount: applications.length,
-        itemBuilder: (context, index) {
-          final application = applications[index] as ApplicationWithIcon;
-          return ListTile(
-            onTap: () {
-              DeviceApps.openApp(application.packageName);
-            },
-            onLongPress: (){
-              DeviceApps.openAppSettings(application.packageName);
-            },
-            title: Text(
-              application.appName,
-              style: const TextStyle(fontSize: 24),
-            ),
-          );
-        },
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black87,
+        body: ListView.builder(
+          padding:
+              const EdgeInsets.only(left: 32, top: 16, right: 32, bottom: 96),
+          itemCount: applications.length,
+          itemBuilder: (context, index) {
+            final application = applications[index] as ApplicationWithIcon;
+            return ListTile(
+              onTap: () {
+                DeviceApps.openApp(application.packageName);
+              },
+              onLongPress: () {
+                DeviceApps.openAppSettings(application.packageName);
+              },
+              title: Text(
+                application.appName,
+                style: const TextStyle(fontSize: 24),
+                overflow: TextOverflow.ellipsis,
+              ),
+            );
+          },
+        ),
       ),
     );
     ;

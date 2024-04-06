@@ -37,10 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   device_apps: ^2.2.0
   flutter_riverpod: ^2.5.1
+  one_clock: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
