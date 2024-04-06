@@ -17,6 +17,7 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
       includeSystemApps: true,
       onlyAppsWithLaunchIntent: true,
     );
+
     setState(() {
       applications = apps;
       applications.sort(
@@ -40,6 +41,9 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
         itemBuilder: (context, index) {
           final application = applications[index] as ApplicationWithIcon;
           return ListTile(
+            onTap: () {
+              DeviceApps.openApp(application.packageName);
+            },
             title: Text(
               application.appName,
               style: const TextStyle(fontSize: 24),
