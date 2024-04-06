@@ -19,6 +19,8 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
     );
     setState(() {
       applications = apps;
+      applications.sort(
+          (a, b) => a.appName.toLowerCase().compareTo(b.appName.toLowerCase()));
       // applications.sort()
     });
   }
