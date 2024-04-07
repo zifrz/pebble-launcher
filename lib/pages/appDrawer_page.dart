@@ -39,7 +39,7 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
         backgroundColor: Colors.black87,
         body: ListView.builder(
           padding:
-              const EdgeInsets.only(left: 32, top: 16, right: 32, bottom: 96),
+              const EdgeInsets.only(left: 32, top: 32, right: 32, bottom: 96),
           itemCount: applications.length,
           itemBuilder: (context, index) {
             final application = applications[index] as ApplicationWithIcon;

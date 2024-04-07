@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pebble/pages/AppDrawerPage.dart';
-import 'package:pebble/pages/HomePage.dart';
+import 'package:pebble/pages/appDrawer_page.dart';
+import 'package:pebble/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
