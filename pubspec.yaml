@@ -38,6 +38,7 @@ dependencies:
   one_clock: ^2.0.0
   installed_apps: ^1.5.0
   provider: ^6.1.2
+  app_install_events: ^0.0.2
 
 dev_dependencies:
   flutter_test:
