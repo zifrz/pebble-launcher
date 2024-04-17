@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
 import 'package:app_install_events/app_install_events.dart';
-// import 'package:app_install_events/';
 
 class AppInfoListModel extends ChangeNotifier {
   List<AppInfo> _appInfoList = [];
@@ -11,30 +10,44 @@ class AppInfoListModel extends ChangeNotifier {
 
   late AppIUEvents _appIUEvents;
 
-  void getApplications() async {
-    _appInfoList = await InstalledApps.getInstalledApps();
-    _appInfoList
-        .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+  AppInfoListModel() {
+    init();
+  }
 
+  Future<void> getApplications() async {
+    try {
+      List<AppInfo> installedApps = await InstalledApps.getInstalledApps();
+      installedApps
+          .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+      _appInfoList = installedApps;
+    } catch (e) {
+      // Handle error if unable to fetch installed apps
+      print('Error fetching installed apps: $e');
+    }
     notifyListeners();
   }
 
-  AppInfoListModel() {
+  void init() async {
+    // Fetch initial list of installed apps
+    await getApplications();
     _appIUEvents = AppIUEvents();
-    getApplications();
 
-    _appIUEvents.appEvents.listen((event) {
-      // Check if the event is an install event
-      if (event.type == IUEventType.installed) {
-        print("App installed: ${event.packageName}");
-        getApplications();
-      }
+    // Listen for app installation and uninstallation events
+    _appIUEvents.appEvents.listen(
+      (event) {
+        if (event.type == IUEventType.installed ||
+            event.type == IUEventType.uninstalled) {
+          // Refresh the list of installed apps when an installation or uninstallation event occurs
+          getApplications();
+        }
+      },
+    );
+  }
 
-      // Check if the event is an uninstall event
-      if (event.type == IUEventType.uninstalled) {
-        print("App uninstalled: ${event.packageName}");
-        getApplications();
-      }
-    });
+  @override
+  void dispose() {
+    // Dispose the model when the widget is disposed
+    _appIUEvents.dispose();
+    super.dispose();
   }
 }
