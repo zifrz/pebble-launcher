@@ -5,8 +5,11 @@ import 'package:app_install_events/app_install_events.dart';
 
 class AppInfoListModel extends ChangeNotifier {
   List<AppInfo> _appInfoList = [];
+  List<AppInfo> _filteredAppInfoList = [];
 
   List<AppInfo> get appInfoList => _appInfoList;
+
+  List<AppInfo> get filteredAppInfoList => _filteredAppInfoList;
 
   late AppIUEvents _appIUEvents;
 
@@ -16,13 +19,15 @@ class AppInfoListModel extends ChangeNotifier {
 
   Future<void> getApplications() async {
     try {
+      _appInfoList.clear();
       List<AppInfo> installedApps = await InstalledApps.getInstalledApps();
       installedApps
           .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       _appInfoList = installedApps;
+      _filteredAppInfoList.addAll(_appInfoList);
     } catch (e) {
       // Handle error if unable to fetch installed apps
-      print('Error fetching installed apps: $e');
+      // print('Error fetching installed apps: $e');
     }
     notifyListeners();
   }
@@ -44,10 +49,13 @@ class AppInfoListModel extends ChangeNotifier {
     );
   }
 
-  @override
-  void dispose() {
-    // Dispose the model when the widget is disposed
-    _appIUEvents.dispose();
-    super.dispose();
+  void onSearch(String value) {
+    _filteredAppInfoList.clear();
+    for (AppInfo application in _appInfoList) {
+      if (application.name.toLowerCase().contains(value.toLowerCase())) {
+        _filteredAppInfoList.add(application);
+      }
+      notifyListeners();
+    }
   }
 }

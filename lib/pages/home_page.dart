@@ -20,9 +20,10 @@ class _HomePageState extends State<HomePage> {
             int sensitivity = 8;
             if (details.delta.dy > sensitivity) {
               // Down Swipe
+              Navigator.pushNamed(context, "app_searcher");
             } else if (details.delta.dy < -sensitivity) {
               // Up Swipe
-              Navigator.pushNamed(context, "apps");
+              Navigator.pushNamed(context, "app_drawer");
             }
           },
           child: Padding(

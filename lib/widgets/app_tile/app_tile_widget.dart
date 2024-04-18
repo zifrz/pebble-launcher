@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
+import 'package:pebble/widgets/app_info_bottomsheet/app_info_detail.dart';
 
-import '../app_info_bottomsheet/app_info_detail.dart';
 
 class AppTile extends StatelessWidget {
   final AppInfo application;
@@ -19,7 +19,7 @@ class AppTile extends StatelessWidget {
       onLongPress: () {
         showModalBottomSheet(
             // isScrollControlled: true,
-            backgroundColor: Color.fromRGBO(5, 5, 5, 1.0),
+            backgroundColor: const Color.fromRGBO(5, 5, 5, 1.0),
             context: context,
             builder: (BuildContext builder) {
               return AppInfoDetail(application: application);

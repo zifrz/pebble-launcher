@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AppSearchBar extends StatelessWidget {
-  const AppSearchBar({super.key});
+  final void Function(String)? onChanged;
+
+  const AppSearchBar({super.key, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return SearchBar(
+      onChanged: (value) {
+        onChanged!(value);
+      },
       padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
       textStyle: MaterialStateProperty.all(
         const TextStyle(
