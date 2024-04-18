@@ -9,7 +9,7 @@ void main() {
 
   runApp(
     ChangeNotifierProvider(
-      create: (context) => new AppInfoListModel(),
+      create: (context) =>  AppInfoListModel(),
       child: const MyApp(),
     ),
   );

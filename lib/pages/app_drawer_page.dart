@@ -22,7 +22,7 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
             padding: const EdgeInsets.only(left: 32, top: 32, right: 32),
             child: Column(
               children: [
-                AppSearchBar(),
+                const AppSearchBar(),
                 const SizedBox(height: 24),
                 Flexible(
                   child: ListView.builder(
