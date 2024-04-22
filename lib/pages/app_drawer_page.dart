@@ -13,31 +13,57 @@ class AppDrawerPage extends StatefulWidget {
 class _AppDrawerPageState extends State<AppDrawerPage> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppInfoListModel>(
-      builder: (context, value, child) => SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.black87,
-          body: Padding(
-            padding: const EdgeInsets.only(left: 32, top: 32, right: 32),
-            child: Column(
-              children: [
-                const SizedBox(height: 24),
-                Flexible(
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: value.appInfoList.length,
-                    itemBuilder: (context, index) {
-                      final application = value.appInfoList[index];
-                      return AppTile(application: application);
-                    },
-                  ),
+  final appInfoNotifier = Provider.of<AppInfoListModel>(context, listen:true);
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black87,
+        body: Padding(
+          padding: const EdgeInsets.only(left: 32, top: 32, right: 32),
+          child: Column(
+            children: [
+              const SizedBox(height: 24),
+              Flexible(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: appInfoNotifier.appInfoList.length,
+                  itemBuilder: (context, index) {
+                    final application = appInfoNotifier.appInfoList[index];
+                    return AppTile(application: application);
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
+
+// return Consumer<AppInfoListModel>(
+//   builder: (context, value, child) => SafeArea(
+//     child: Scaffold(
+//       backgroundColor: Colors.black87,
+//       body: Padding(
+//         padding: const EdgeInsets.only(left: 32, top: 32, right: 32),
+//         child: Column(
+//           children: [
+//             const SizedBox(height: 24),
+//             Flexible(
+//               child: ListView.builder(
+//                 scrollDirection: Axis.vertical,
+//                 shrinkWrap: true,
+//                 itemCount: value.appInfoList.length,
+//                 itemBuilder: (context, index) {
+//                   final application = value.appInfoList[index];
+//                   return AppTile(application: application);
+//                 },
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     ),
+//   ),
+// );

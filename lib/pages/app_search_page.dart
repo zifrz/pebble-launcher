@@ -14,42 +14,80 @@ class AppSearchPage extends StatefulWidget {
 class _AppSearchPageState extends State<AppSearchPage> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppInfoListModel>(
-      builder: (context, value, child) => SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.black87,
-          body: Padding(
-            padding: const EdgeInsets.only(left: 32, top: 32, right: 32),
-            child: Column(
-              children: [
-                AppSearchBar(onChanged: value.onSearch),
-                const SizedBox(height: 24),
-                Flexible(
-                  child: value.filteredAppInfoList.isEmpty
-                      ? const Text('No apps found for your search')
-                      : ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: value.filteredAppInfoList.length,
-                          itemBuilder: (context, index) {
-                            if (value.filteredAppInfoList.isEmpty) {
-                              return const Text(
-                                'No apps found for your search',
-                                style: TextStyle(fontSize: 20),
-                              ); // Display message for empty list
-                            } else {
-                              final application =
-                                  value.filteredAppInfoList[index];
-                              return AppTile(application: application);
-                            }
-                          },
-                        ),
-                ),
-              ],
-            ),
+    final appInfoNotifier =
+        Provider.of<AppInfoListModel>(context, listen: true);
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black87,
+        body: Padding(
+          padding: const EdgeInsets.only(left: 32, top: 32, right: 32),
+          child: Column(
+            children: [
+              AppSearchBar(onChanged: appInfoNotifier.onSearch),
+              const SizedBox(height: 24),
+              Flexible(
+                child: appInfoNotifier.filteredAppInfoList.isEmpty
+                    ? const Text('No apps found for your search')
+                    : ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: appInfoNotifier.filteredAppInfoList.length,
+                        itemBuilder: (context, index) {
+                          if (appInfoNotifier.filteredAppInfoList.isEmpty) {
+                            return const Text(
+                              'No apps found for your search',
+                              style: TextStyle(fontSize: 20),
+                            ); // Display message for empty list
+                          } else {
+                            final application =
+                                appInfoNotifier.filteredAppInfoList[index];
+                            return AppTile(application: application);
+                          }
+                        },
+                      ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
+
+// return Consumer<AppInfoListModel>(
+//   builder: (context, value, child) => SafeArea(
+//     child: Scaffold(
+//       backgroundColor: Colors.black87,
+//       body: Padding(
+//         padding: const EdgeInsets.only(left: 32, top: 32, right: 32),
+//         child: Column(
+//           children: [
+//             AppSearchBar(onChanged: value.onSearch),
+//             const SizedBox(height: 24),
+//             Flexible(
+//               child: value.filteredAppInfoList.isEmpty
+//                   ? const Text('No apps found for your search')
+//                   : ListView.builder(
+//                       scrollDirection: Axis.vertical,
+//                       shrinkWrap: true,
+//                       itemCount: value.filteredAppInfoList.length,
+//                       itemBuilder: (context, index) {
+//                         if (value.filteredAppInfoList.isEmpty) {
+//                           return const Text(
+//                             'No apps found for your search',
+//                             style: TextStyle(fontSize: 20),
+//                           ); // Display message for empty list
+//                         } else {
+//                           final application =
+//                               value.filteredAppInfoList[index];
+//                           return AppTile(application: application);
+//                         }
+//                       },
+//                     ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     ),
+//   ),
+// );

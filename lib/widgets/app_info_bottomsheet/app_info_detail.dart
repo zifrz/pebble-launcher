@@ -1,6 +1,9 @@
+import 'package:app_usage/app_usage.dart';
 import 'package:flutter/material.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
+import 'package:pebble/models/appusage_list_model.dart';
+import 'package:provider/provider.dart';
 
 class AppInfoDetail extends StatelessWidget {
   final AppInfo application;
@@ -9,6 +12,8 @@ class AppInfoDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appUsageNotifier =
+    Provider.of<AppUsageListModel>(context, listen: true);
     return ListView(
         padding: const EdgeInsets.all(32),
         shrinkWrap: true,
@@ -21,6 +26,7 @@ class AppInfoDetail extends StatelessWidget {
               style: const TextStyle(fontSize: 24),
               overflow: TextOverflow.ellipsis,
             ),
+            leading: Text("${appUsageNotifier.onSearch(application.packageName)?.usage}"),
           ),
           ListTile(
             leading: const Icon(Icons.settings_rounded, color: Colors.white,),

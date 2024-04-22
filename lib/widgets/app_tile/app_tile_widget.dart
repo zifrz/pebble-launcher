@@ -3,7 +3,6 @@ import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
 import 'package:pebble/widgets/app_info_bottomsheet/app_info_detail.dart';
 
-
 class AppTile extends StatelessWidget {
   final AppInfo application;
 
