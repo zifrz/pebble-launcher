@@ -16,7 +16,7 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
     return Consumer<AppInfoListModel>(
       builder: (context, value, child) => SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.black,
           body: Padding(
             padding: const EdgeInsets.only(left: 32, top: 32, right: 32),
             child: Column(

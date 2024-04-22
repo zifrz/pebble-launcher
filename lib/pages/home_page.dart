@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.black,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: GestureDetector(
           onVerticalDragUpdate: (details) {
