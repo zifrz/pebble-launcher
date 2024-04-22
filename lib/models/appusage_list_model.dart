@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:installed_apps/app_info.dart';
-import 'package:installed_apps/installed_apps.dart';
 import 'package:app_install_events/app_install_events.dart';
 import 'package:app_usage/app_usage.dart';
 
@@ -23,31 +21,25 @@ class AppUsageListModel extends ChangeNotifier {
           await AppUsage().getAppUsage(startDate, endDate);
       infoList.sort(
           (a, b) => a.appName.toLowerCase().compareTo(b.appName.toLowerCase()));
-      print(_appUsageList);
-      for (var info in infoList) {
-        // print(info.toString());
-      }
-    } on AppUsageException catch (exception) {
-      print(">>> Exception: $exception");
+      _appUsageList = infoList;
+      notifyListeners(); // Notify listeners about the data update
+    } catch (exception) {
+      // Handle error if unable to fetch apps usage
+      // print('Error fetching apps usage: $exception');
     }
-
-    notifyListeners();
   }
 
-  // Future<void> getApplications() async {
-  //   try {
-  //     _appInfoList.clear();
-  //     List<AppUsageInfo> installedApps = await InstalledApps.getInstalledApps();
-  //     installedApps
-  //         .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-  //     _appInfoList = installedApps;
-  //     _filteredAppInfoList.addAll(_appInfoList);
-  //   } catch (e) {
-  //     // Handle error if unable to fetch installed apps
-  //     // print('Error fetching installed apps: $e');
-  //   }
-  //   notifyListeners();
-  // }
+  AppUsageInfo onSearch(String value) {
+    for (var info in _appUsageList) {
+      if (info.packageName.compareTo(value) == 0) {
+        return info; // Return the matching AppUsageInfo object
+      }
+    }
+    DateTime endDate = DateTime.now();
+    DateTime startDate = DateTime(endDate.year, endDate.month, endDate.day);
+    return AppUsageInfo("none", 0, startDate, startDate,
+        startDate); // Return if no match is found
+  }
 
   void init() async {
     // Fetch initial list of app usage
@@ -64,11 +56,5 @@ class AppUsageListModel extends ChangeNotifier {
         }
       },
     );
-  }
-
-  AppUsageInfo? onSearch(String value) {
-    AppUsageInfo application =
-        _appUsageList.firstWhere((element) => element.packageName == value);
-    return application;
   }
 }

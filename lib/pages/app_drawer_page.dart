@@ -40,30 +40,3 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
     );
   }
 }
-
-// return Consumer<AppInfoListModel>(
-//   builder: (context, value, child) => SafeArea(
-//     child: Scaffold(
-//       backgroundColor: Colors.black87,
-//       body: Padding(
-//         padding: const EdgeInsets.only(left: 32, top: 32, right: 32),
-//         child: Column(
-//           children: [
-//             const SizedBox(height: 24),
-//             Flexible(
-//               child: ListView.builder(
-//                 scrollDirection: Axis.vertical,
-//                 shrinkWrap: true,
-//                 itemCount: value.appInfoList.length,
-//                 itemBuilder: (context, index) {
-//                   final application = value.appInfoList[index];
-//                   return AppTile(application: application);
-//                 },
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     ),
-//   ),
-// );
