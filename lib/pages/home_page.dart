@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_clock/one_clock.dart';
+import 'package:pebble/pages/app_usage_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,12 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Colors.black87,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AppUsagePage()));
+          },
+        ),
         body: GestureDetector(
           onVerticalDragUpdate: (details) {
             int sensitivity = 8;
