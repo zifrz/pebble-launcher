@@ -14,7 +14,6 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black87,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: GestureDetector(
           onVerticalDragUpdate: (details) {
             int sensitivity = 8;
