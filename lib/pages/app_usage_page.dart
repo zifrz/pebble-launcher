@@ -19,16 +19,19 @@ class _AppUsagePageState extends State<AppUsagePage> {
   void getUsageStats() async {
     try {
       DateTime endDate = DateTime.now();
-      DateTime startDate = endDate.subtract(Duration(hours: 1));
+      DateTime startDate = DateTime(endDate.year, endDate.month, endDate.day);
+      // DateTime startDate = endDate.subtract(const Duration(hours: 1));
       List<AppUsageInfo> infoList =
           await AppUsage().getAppUsage(startDate, endDate);
+      infoList.sort(
+          (a, b) => a.appName.toLowerCase().compareTo(b.appName.toLowerCase()));
       setState(() => _infos = infoList);
 
       for (var info in infoList) {
         print(info.toString());
       }
     } on AppUsageException catch (exception) {
-      print(exception);
+      print(">>> Exception: $exception");
     }
   }
 
@@ -44,11 +47,24 @@ class _AppUsagePageState extends State<AppUsagePage> {
           itemCount: _infos.length,
           itemBuilder: (context, index) {
             return ListTile(
-                title: Text(_infos[index].appName),
-                trailing: Text(_infos[index].usage.toString()));
+              title: Text(
+                _infos[index].appName,
+                style: const TextStyle(color: Colors.black),
+              ),
+              subtitle: Text(
+                _infos[index].packageName.toString(),
+                style: const TextStyle(color: Colors.black),
+              ),
+              trailing: Text(
+                _infos[index].usage.toString(),
+                style: const TextStyle(color: Colors.black),
+              ),
+            );
           }),
       floatingActionButton: FloatingActionButton(
-          onPressed: getUsageStats, child: const Icon(Icons.file_download)),
+        onPressed: getUsageStats,
+        child: const Icon(Icons.file_download),
+      ),
     );
   }
 }
