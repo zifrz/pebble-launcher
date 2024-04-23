@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_clock/one_clock.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,24 +47,49 @@ class _HomePageState extends State<HomePage> {
                             Theme.of(context).colorScheme.onBackground,
                         datetime: DateTime.now()),
                     const SizedBox(height: 32),
-                    const Text(
-                      "Fav App 1",
-                      style: TextStyle(fontSize: 24),
+                    ListTile(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      onTap: () => openUrl("camera:"),
+                      title: const Text(
+                        "Camera",
+                        style: TextStyle(fontSize: 28),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "Fav App 2",
-                      style: TextStyle(fontSize: 24),
+                    ListTile(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      onTap: () => openUrl("tel:"),
+                      title: const Text(
+                        "Phone Dialer",
+                        style: TextStyle(fontSize: 28),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "Fav App 3",
-                      style: TextStyle(fontSize: 24),
+                    ListTile(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      onTap: () => openUrl("sms:"),
+                      title: const Text(
+                        "Messages",
+                        style: TextStyle(fontSize: 28),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    const SizedBox(height: 20),
+                    ListTile(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      onTap: () => openUrl("https://www.google.com/"),
+                      title: const Text(
+                        "Browser",
+                        style: TextStyle(fontSize: 28),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ],
                 ),
-                const Spacer(),
+                // const Spacer(),
 
                 // App Drawer Icons
                 IconButton(
@@ -83,5 +109,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> openUrl(String url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      // Handle error when the camera cannot be opened
+    }
   }
 }
