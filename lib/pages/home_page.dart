@@ -13,10 +13,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black87,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: GestureDetector(
           onVerticalDragUpdate: (details) {
-            int sensitivity = 8;
+            int sensitivity = 4;
             if (details.delta.dy > sensitivity) {
               // Down Swipe
               Navigator.pushNamed(context, "app_searcher");
@@ -42,26 +42,28 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         showSeconds: false,
                         isLive: true,
-                        digitalClockTextColor: Colors.white,
+                        digitalClockTextColor:
+                            Theme.of(context).colorScheme.onBackground,
                         datetime: DateTime.now()),
                     const SizedBox(height: 32),
                     const Text(
                       "Fav App 1",
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      style: TextStyle(fontSize: 24),
                     ),
                     const SizedBox(height: 20),
                     const Text(
                       "Fav App 2",
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      style: TextStyle(fontSize: 24),
                     ),
                     const SizedBox(height: 20),
                     const Text(
                       "Fav App 3",
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      style: TextStyle(fontSize: 24),
                     ),
                     const SizedBox(height: 20),
                   ],
                 ),
+                const Spacer(),
 
                 // App Drawer Icons
                 IconButton(
@@ -70,9 +72,9 @@ class _HomePageState extends State<HomePage> {
                   },
                   padding: const EdgeInsets.all(32),
                   iconSize: 40,
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_upward_rounded,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
               ],

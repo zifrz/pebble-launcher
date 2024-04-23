@@ -36,7 +36,7 @@ class AppInfoDetail extends StatelessWidget {
         ListTile(
           leading: const Icon(
             Icons.settings_rounded,
-            color: Colors.white,
+            // color: Colors.white,
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -52,7 +52,7 @@ class AppInfoDetail extends StatelessWidget {
         ListTile(
           leading: const Icon(
             Icons.delete_rounded,
-            color: Colors.white,
+            // color: Colors.white,
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -68,7 +68,7 @@ class AppInfoDetail extends StatelessWidget {
         ListTile(
           leading: const Icon(
             Icons.access_time,
-            color: Colors.white,
+            // color: Colors.white,
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

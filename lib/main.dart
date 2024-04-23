@@ -32,9 +32,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Pebble",
-      darkTheme: ThemeData.dark(),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black87),
+        colorScheme: const ColorScheme(
+          brightness: Brightness.dark,
+          primary: Colors.white,
+          onPrimary: Colors.black,
+          secondary: Colors.black,
+          onSecondary: Colors.white,
+          error: Colors.red,
+          onError: Colors.black,
+          background: Colors.black,
+          onBackground: Colors.white,
+          surface: Colors.black,
+          onSurface: Colors.white,
+        ),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,

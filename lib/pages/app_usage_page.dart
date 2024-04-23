@@ -16,10 +16,10 @@ class _AppUsagePageState extends State<AppUsagePage> {
         Provider.of<AppUsageListModel>(context, listen: true);
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text('Total App Usage'),
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.background,
       ),
       body: ListView.builder(
           itemCount: appUsageNotifier.appUsageList.length,
@@ -27,15 +27,15 @@ class _AppUsagePageState extends State<AppUsagePage> {
             return ListTile(
               title: Text(
                 appUsageNotifier.appUsageList[index].appName,
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
               ),
               subtitle: Text(
                 appUsageNotifier.appUsageList[index].packageName.toString(),
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
               ),
               trailing: Text(
                 appUsageNotifier.appUsageList[index].usage.toString(),
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
               ),
             );
           }),
@@ -43,10 +43,10 @@ class _AppUsagePageState extends State<AppUsagePage> {
         onPressed: () {
           appUsageNotifier.getUsageStats();
         },
-        backgroundColor: Colors.white,
-        child: const Icon(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: Icon(
           Icons.refresh_rounded,
-          color: Colors.black,
+          color: Theme.of(context).colorScheme.inversePrimary,
         ),
       ),
     );
