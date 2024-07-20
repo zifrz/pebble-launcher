@@ -16,3 +16,4 @@ An Android App Launcher made using Flutter.
 ### Known Issues
 
 - Camera on the home-screen doesn't work.
+- Keyboard won't reopen after closing while searching
