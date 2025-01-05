@@ -1,5 +1,7 @@
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:one_clock/one_clock.dart';
+import 'package:platform/platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +12,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void _openCamera() {
+    if (const LocalPlatform().isAndroid) {
+      const AndroidIntent intent = AndroidIntent(
+        action: 'android.media.action.IMAGE_CAPTURE',
+      );
+      intent.launch();
+    }
+  }
+
+  void _openDialer() {
+    if (const LocalPlatform().isAndroid) {
+      const AndroidIntent intent = AndroidIntent(
+        action: 'android.intent.action.DIAL',
+      );
+      intent.launch();
+    }
+  }
+
+  void _openMessages() {
+    if (const LocalPlatform().isAndroid) {
+      const AndroidIntent intent = AndroidIntent(
+        action: 'android.intent.action.MAIN',
+        category: 'android.intent.category.APP_MESSAGING',
+      );
+      intent.launch();
+    }
+  }
+
+  void _openBrowser() {
+    if (const LocalPlatform().isAndroid) {
+      const AndroidIntent intent = AndroidIntent(
+        action: 'android.intent.action.MAIN',
+        category: 'android.intent.category.APP_BROWSER',
+      );
+      intent.launch();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                     ListTile(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
-                      onTap: () => openUrl("camera:"),
+                      onTap: _openCamera,
                       title: const Text(
                         "Camera",
                         style: TextStyle(fontSize: 28),
@@ -60,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                     ListTile(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
-                      onTap: () => openUrl("tel:"),
+                      onTap: _openDialer,
                       title: const Text(
                         "Phone Dialer",
                         style: TextStyle(fontSize: 28),
@@ -70,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                     ListTile(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
-                      onTap: () => openUrl("sms:"),
+                      onTap: _openMessages,
                       title: const Text(
                         "Messages",
                         style: TextStyle(fontSize: 28),
@@ -80,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                     ListTile(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
-                      onTap: () => openUrl("https://www.google.com/"),
+                      onTap: _openBrowser,
                       title: const Text(
                         "Browser",
                         style: TextStyle(fontSize: 28),
@@ -89,7 +129,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                // const Spacer(),
 
                 // App Drawer Icons
                 IconButton(
